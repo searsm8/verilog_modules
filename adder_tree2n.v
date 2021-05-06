@@ -1,10 +1,15 @@
 
-//adder_tree2n module generates a tree of parallel adders to efficiently add sets of numbers
-//TREE_SIZE is expected to be a power of 2
-//example: TREE_SIZE = 4, DATA_SIZE = 8
-//inputs A and B will be 32 bits long (4 sets of 8 bits)
-//output Z will be 10 bits (each layer of addition adds one bit)
-module adder_tree2n #(parameter TREE_SIZE=8, DATA_SIZE = 8)
+// adder_tree2n module generates a tree of parallel adders to efficiently add sets of numbers
+// TREE_SIZE is expected to be a power of 2
+//
+// example: TREE_SIZE = 4, DATA_SIZE = 8
+// inputs A and B will be 32 bits long (4 sets of 8 bits)
+// Tree will consist of 3 layers:
+// L0 with four 8b adders
+// L1 with two 9b adders
+// L2 with one 10b adder
+// output Z will be 11 bits (each layer of addition adds one bit)
+module adder_tree2n #(parameter TREE_SIZE=4, DATA_SIZE = 8)
 (
 	input [TREE_SIZE*DATA_SIZE - 1 : 0] A,
 	input [TREE_SIZE*DATA_SIZE - 1 : 0] B,
